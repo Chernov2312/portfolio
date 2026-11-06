@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Максим Чернов — Backend Developer (Python)</title>
+<meta name="description" content="Резюме backend-разработчика: FastAPI, Django, asyncio, Celery, Redis, SQLAlchemy, Docker, CI/CD, pytest" />
+<style>
+  :root {
+    --bg: #0d1117;
+    --bg-soft: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #58a6ff;
+    --accent-2: #3fb950;
+    --chip: #1f6feb22;
+    --radius: 14px;
+    --maxw: 980px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: radial-gradient(1200px 600px at 20% -10%, #1f6feb22, transparent 60%),
+                radial-gradient(900px 500px at 100% 0%, #3fb95022, transparent 55%),
+                var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .container { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+
+  /* HERO */
+  .hero { padding: 72px 0 40px; border-bottom: 1px solid var(--border); }
+  .hero-top { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .avatar {
+    width: 96px; height: 96px; border-radius: 50%;
+    background: linear-gradient(135deg, #1f6feb, #3fb950);
+    display: grid; place-items: center;
+    font-size: 34px; font-weight: 700; color: #fff;
+    flex: 0 0 auto;
+    box-shadow: 0 0 0 4px #0d1117, 0 0 0 5px var(--border);
+  }
+  h1 { margin: 0 0 6px; font-size: clamp(28px, 4vw, 40px); letter-spacing: -0.02em; }
+  .role { color: var(--accent-2); font-weight: 600; font-size: 18px; margin: 0 0 8px; }
+  .location { color: var(--muted); font-size: 14px; margin: 0; display: flex; gap: 14px; flex-wrap: wrap; }
+  .contacts { margin-top: 22px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 16px; border-radius: 999px;
+    border: 1px solid var(--border); background: var(--bg-soft);
+    color: var(--text); font-size: 14px; font-weight: 500;
+    transition: border-color .15s ease, transform .15s ease, background .15s ease;
+  }
+  .btn:hover { text-decoration: none; border-color: var(--accent); background: #1f6feb1a; transform: translateY(-1px); }
+
+  /* SECTIONS */
+  section { padding: 42px 0; border-bottom: 1px solid var(--border); }
+  section:last-of-type { border-bottom: none; }
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin: 0 0 18px; font-weight: 700; }
+  .summary { font-size: 16px; color: #c9d1d9; max-width: 780px; }
+
+  /* STACK */
+  .stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; }
+  .stack-card { background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; }
+  .stack-card h3 { margin: 0 0 10px; font-size: 14px; color: var(--text); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    font-size: 12.5px; padding: 4px 10px; border-radius: 999px;
+    background: var(--chip); border: 1px solid #1f6feb55; color: #9ecbff; white-space: nowrap;
+  }
+  .chip.green { background: #3fb95022; border-color: #3fb95055; color: #7ee787; }
+
+  /* PROJECTS */
+  .item { padding: 18px 0; border-bottom: 1px dashed var(--border); }
+  .item:last-child { border-bottom: none; padding-bottom: 0; }
+  .item-head { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: baseline; }
+  .item-title { font-weight: 700; font-size: 16px; }
+  .item-sub { color: var(--muted); font-size: 13.5px; }
+  .item ul { margin: 10px 0 0; padding-left: 20px; color: #c9d1d9; font-size: 14.5px; }
+  .item ul li { margin-bottom: 6px; }
+  .tags { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font-size: 11.5px; padding: 2px 8px; border-radius: 6px; background: #21262d; border: 1px solid var(--border); color: var(--muted); }
+
+  /* FOOTER */
+  footer { padding: 30px 0 50px; text-align: center; color: var(--muted); font-size: 13px; }
+
+  @media (max-width: 560px) {
+    .hero { padding-top: 48px; }
+    .avatar { width: 72px; height: 72px; font-size: 26px; }
+    section { padding: 32px 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="container">
+    <div class="hero-top">
+      <div class="avatar" aria-hidden="true">МЧ</div>
+      <div>
+        <h1>Максим Чернов</h1>
+        <p class="role">Backend Developer · Python</p>
+        <p class="location">
+          <span>💼 Open to work</span>
+          <span>🐍 FastAPI / Django</span>
+          <span>⚙️ Docker · CI/CD</span>
+        </p>
+      </div>
+    </div>
+    <div class="contacts">
+      <a class="btn" href="https://github.com/Chernov2312" target="_blank" rel="noopener">🐙 GitHub</a>
+      <a class="btn" href="mailto:m.chernov_2008@mail.ru">✉️ m.chernov_2008@mail.ru</a>
+      <a class="btn" href="https://t.me/Lirikalimaxik" target="_blank" rel="noopener">✈️ @Lirikalimaxik</a>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- SUMMARY -->
+  <section id="about">
+    <h2>О себе</h2>
+    <p class="summary">
+      Backend-разработчик на Python. Строю асинхронные API на <strong>FastAPI</strong>,
+      пишу бизнес-логику на <strong>Django</strong>, выношу фоновые задачи в
+      <strong>Celery + Redis</strong>. Работаю с <strong>SQLAlchemy</strong> и
+      <strong>PostgreSQL</strong>, упаковываю сервисы в <strong>Docker / docker-compose</strong>,
+      настраиваю <strong>CI/CD</strong> на GitHub Actions и покрываю код тестами на
+      <strong>pytest</strong>. В портфолио — 6 проектов: от чата с GigaChat до сервиса
+      бронирования переговорок и психологической игры на Django.
+    </p>
+  </section>
+
+  <!-- STACK -->
+  <section id="stack">
+    <h2>Стек</h2>
+    <div class="stack-grid">
+
+      <div class="stack-card">
+        <h3>Язык и фреймворки</h3>
+        <div class="chips">
+          <span class="chip">Python 3.11+</span>
+          <span class="chip">FastAPI</span>
+          <span class="chip">Django 5</span>
+          <span class="chip">DRF</span>
+          <span class="chip">Pydantic v2</span>
+          <span class="chip">Sanic</span>
+        </div>
+      </div>
+
+      <div class="stack-card">
+        <h3>Асинхронность и очереди</h3>
+        <div class="chips">
+          <span class="chip green">asyncio</span>
+          <span class="chip green">Celery</span>
+          <span class="chip green">Redis</span>
+          <span class="chip green">SSE</span>
+          <span class="chip green">httpx</span>
+        </div>
+      </div>
+
+      <div class="stack-card">
+        <h3>Данные</h3>
+        <div class="chips">
+          <span class="chip">SQLAlchemy 2.0</span>
+          <span class="chip">PostgreSQL</span>
+          <span class="chip">asyncpg</span>
+          <span class="chip">aiosqlite</span>
+          <span class="chip">Alembic</span>
+        </div>
+      </div>
+
+      <div class="stack-card">
+        <h3>Инфраструктура</h3>
+        <div class="chips">
+          <span class="chip">Docker</span>
+          <span class="chip">docker-compose</span>
+          <span class="chip">GitHub Actions</span>
+          <span class="chip">CI/CD</span>
+          <span class="chip">Poetry</span>
+        </div>
+      </div>
+
+      <div class="stack-card">
+        <h3>Качество кода</h3>
+        <div class="chips">
+          <span class="chip green">pytest</span>
+          <span class="chip green">pytest-asyncio</span>
+          <span class="chip green">flake8</span>
+          <span class="chip green">black</span>
+          <span class="chip green">coverage</span>
+        </div>
+      </div>
+
+      <div class="stack-card">
+        <h3>Прочее</h3>
+        <div class="chips">
+          <span class="chip">Git</span>
+          <span class="chip">Linux</span>
+          <span class="chip">REST</span>
+          <span class="chip">JWT</span>
+          <span class="chip">Swagger / OpenAPI</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <h2>Проекты (GitHub: <a href="https://github.com/Chernov2312" target="_blank" rel="noopener">Chernov2312</a>)</h2>
+
+    <div class="item">
+      <div class="item-head">
+        <div class="item-title">💬 Chat with Model</div>
+        <div class="item-sub"><a href="https://github.com/Chernov2312/chat_with_model" target="_blank" rel="noopener">chat_with_model</a></div>
+      </div>
+      <ul>
+        <li>Веб-приложение для общения с GigaChat: <strong>FastAPI</strong> + <strong>React/Vite</strong>.</li>
+        <li>Регистрация/вход с <strong>Bearer-токеном</strong>, создание и удаление чатов, история сессий.</li>
+        <li>Потоковая генерация ответа через <strong>Server-Sent Events (SSE)</strong>.</li>
+        <li>Хранение пользователей, сессий и истории в <strong>PostgreSQL</strong>.</li>
+        <li>Полный стек в <strong>docker-compose</strong>: API, frontend, PostgreSQL; CI на GitHub Actions.</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">FastAPI</span><span class="tag">React/Vite</span><span class="tag">SSE</span>
+        <span class="tag">PostgreSQL</span><span class="tag">Docker Compose</span><span class="tag">GigaChat</span>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-head">
+        <div class="item-title">🏢 Переговорки — сервис бронирования коворкинга</div>
+        <div class="item-sub"><a href="https://github.com/koworking" target="_blank" rel="noopener">koworking</a></div>
+      </div>
+      <ul>
+        <li>Асинхронный API на <strong>FastAPI</strong>, JWT-аутентификация с ролями <code>employee</code> / <code>admin</code>.</li>
+        <li>Защита от двойного бронирования (Double Booking) на уровне БД.</li>
+        <li>Изоляция прав: сотрудник удаляет только свои брони, администратор — любые.</li>
+        <li>Интеграционные тесты на <strong>pytest</strong> + <code>aiosqlite</code> в памяти, не задевая рабочий PostgreSQL.</li>
+        <li>Запуск всего окружения через <strong>docker compose up --build</strong>, автосоздание таблиц и слотов при старте.</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">FastAPI</span><span class="tag">PostgreSQL</span><span class="tag">JWT</span>
+        <span class="tag">pytest</span><span class="tag">Poetry</span><span class="tag">Docker</span>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-head">
+        <div class="item-title">🔗 ShortLinks — сервис коротких ссылок</div>
+        <div class="item-sub"><a href="https://github.com/Chernov2312/short_links" target="_blank" rel="noopener">short_links</a></div>
+      </div>
+      <ul>
+        <li>REST API на <strong>Sanic</strong> (асинхронный веб-сервер) с <strong>Pydantic v2</strong>.</li>
+        <li>Генерация уникального 7-значного токена, валидация URL, мгновенный поиск по <strong>Redis</strong>.</li>
+        <li>Модульные тесты с интеграционными моками: <strong>pytest + pytest-mock + sanic-testing</strong>.</li>
+        <li>Контейнеризация через <strong>Docker / Docker Compose</strong>, CI с линтерами (flake8, black).</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">Sanic</span><span class="tag">Redis</span><span class="tag">Pydantic v2</span>
+        <span class="tag">pytest</span><span class="tag">Docker</span>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-head">
+        <div class="item-title">🏙 PersonVille — психологическая игра-тест</div>
+        <div class="item-sub"><a href="https://github.com/Chernov2312/PersonVille" target="_blank" rel="noopener">PersonVille</a></div>
+      </div>
+      <ul>
+        <li>Командный проект на <strong>Django 5</strong>: тест по модели «Большая пятёрка», построение персонального города.</li>
+        <li>Регистрация, авторизация, подтверждение email, смена email/пароля по коду.</li>
+        <li>История прохождений, административная панель Django, фикстуры и миграции.</li>
+        <li>CI: <strong>pytest</strong> + линтеры на GitHub Actions (badges в README).</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">Django 5</span><span class="tag">Python 3.11+</span><span class="tag">PostgreSQL</span>
+        <span class="tag">pytest</span><span class="tag">GitHub Actions</span>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-head">
+        <div class="item-title">✅ ToDoList — менеджер задач</div>
+        <div class="item-sub"><a href="https://github.com/Chernov2312/ToDoList" target="_blank" rel="noopener">ToDoList</a></div>
+      </div>
+      <ul>
+        <li>Веб-приложение с регистрацией пользователей и управлением заданиями разной сложности.</li>
+        <li>Указание сроков выполнения, история заданий со статусами «выполнено / просрочено».</li>
+        <li>Запуск через <strong>docker-compose up --build</strong>, тесты на <strong>pytest</strong> + линтеры <strong>flake8 / black</strong> в CI.</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">Django</span><span class="tag">Docker Compose</span><span class="tag">pytest</span>
+        <span class="tag">flake8</span><span class="tag">black</span>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-head">
+        <div class="item-title">📚 Lyceum — учебный проект по Django</div>
+        <div class="item-sub"><a href="https://github.com/Chernov2312/lyceum" target="_blank" rel="noopener">lyceum</a></div>
+      </div>
+      <ul>
+        <li>Учебный проект по специализации Django: локализация (<code>makemessages</code> / <code>compilemessages</code>), поддерживаемые языки ru/en/de.</li>
+        <li>ER-диаграмма БД, superuser, запуск в dev-режиме, CI с тестами и линтерами.</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">Django</span><span class="tag">i18n</span><span class="tag">GitHub Actions</span>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    © <span id="year">2026</span> Максим Чернов · GitHub: <a href="https://github.com/Chernov2312" target="_blank" rel="noopener">Chernov2312</a>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
