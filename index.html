@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Максим Чернов — Backend Developer (Python)</title>
-<meta name="description" content="Резюме backend-разработчика: FastAPI, Django, asyncio, Celery, Redis, SQLAlchemy, Docker, CI/CD, pytest" />
+<meta name="description" content="Портфолио backend-разработчика на Python: FastAPI, Django, WebSocket, Celery, PostgreSQL, MCP, локальные LLM, Docker и pytest." />
 <style>
   :root {
     --bg: #0d1117;
@@ -134,8 +134,10 @@
       <strong>Celery + Redis</strong>. Работаю с <strong>SQLAlchemy</strong> и
       <strong>PostgreSQL</strong>, упаковываю сервисы в <strong>Docker / docker-compose</strong>,
       настраиваю <strong>CI/CD</strong> на GitHub Actions и покрываю код тестами на
-      <strong>pytest</strong>. В портфолио — более 6 проектов: от чата с GigaChat до сервиса
-      бронирования переговорок и психологической игры на Django.
+      <strong>pytest</strong>. В портфолио — веб-мессенджер с ИИ-функциями, MCP-сервер
+      для генерации тестов с локальной моделью, сервис доставки вебхуков, чат с GigaChat,
+      сервис бронирования переговорок и другие проекты. Участвую в разработке
+      командного прототипа AI-buddy — помощника для онбординга стажёров.
     </p>
   </section>
 
@@ -163,6 +165,7 @@
           <span class="chip green">Celery</span>
           <span class="chip green">Redis</span>
           <span class="chip green">SSE</span>
+          <span class="chip green">WebSocket</span>
           <span class="chip green">httpx</span>
         </div>
       </div>
@@ -175,6 +178,7 @@
           <span class="chip">asyncpg</span>
           <span class="chip">aiosqlite</span>
           <span class="chip">Alembic</span>
+          <span class="chip">S3 / Yandex Cloud</span>
         </div>
       </div>
 
@@ -197,6 +201,18 @@
           <span class="chip green">flake8</span>
           <span class="chip green">black</span>
           <span class="chip green">coverage</span>
+          <span class="chip green">Ruff</span>
+        </div>
+      </div>
+
+      <div class="stack-card">
+        <h3>ИИ и инструменты ассистентов</h3>
+        <div class="chips">
+          <span class="chip">MCP</span>
+          <span class="chip">OpenVINO Model Server</span>
+          <span class="chip">Ollama</span>
+          <span class="chip">Whisper</span>
+          <span class="chip">Tool calling</span>
         </div>
       </div>
 
@@ -217,6 +233,81 @@
   <!-- PROJECTS -->
   <section id="projects">
     <h2>Проекты (GitHub: <a href="https://github.com/Chernov2312" target="_blank" rel="noopener">Chernov2312</a>)</h2>
+
+    <div class="item">
+      <div class="item-head">
+        <div class="item-title">⚡ Spark — веб-мессенджер с ИИ-функциями</div>
+        <div class="item-sub"><a href="Spark.md">README · Spark</a></div>
+      </div>
+      <ul>
+        <li>Backend на <strong>FastAPI</strong> с REST API и <strong>WebSocket</strong>: личные и групповые чаты, профили, аватары, статусы набора текста и реакции.</li>
+        <li>Регистрация, подтверждение почты и вход по <strong>JWT</strong>; хранение данных в <strong>PostgreSQL</strong>, передача событий и очередь сообщений через <strong>Redis</strong>, фоновые задачи в <strong>Celery</strong>.</li>
+        <li>Краткое содержание переписки и переписывание текста через локальную <strong>Ollama</strong> с OpenAI-совместимым клиентом; распознавание голосовых вложений через <strong>Whisper</strong> по запросу пользователя.</li>
+        <li>Сообщения с файлами и изображениями, загрузка вложений в <strong>S3-совместимое хранилище Yandex Cloud</strong>.</li>
+        <li>Запуск через <strong>Docker Compose</strong> с миграциями <strong>Alembic</strong>; отдельное тестовое окружение с PostgreSQL и Redis, <strong>pytest</strong>, Testcontainers и <strong>Ruff</strong>.</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">FastAPI</span><span class="tag">WebSocket</span><span class="tag">PostgreSQL</span>
+        <span class="tag">Redis</span><span class="tag">Celery</span><span class="tag">Ollama</span>
+        <span class="tag">Whisper</span><span class="tag">S3</span><span class="tag">Docker Compose</span>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-head">
+        <div class="item-title">🧪 Code Tester MCP — инструменты для тестирования Python-проектов</div>
+        <div class="item-sub"><a href="code_tester.md">README · Code Tester MCP</a></div>
+      </div>
+      <ul>
+        <li><strong>MCP-сервер</strong> с транспортом <strong>Streamable HTTP</strong> связывает Python-проект с AI-ассистентом: чтение дерева проекта и файлов, подготовка тестов и рефакторинг.</li>
+        <li>Генерация <code>conftest.py</code>, API-тестов на <strong>pytest</strong> и <strong>Pydantic</strong>-схем с учётом контекста проекта и настроек <code>pytest.ini</code>.</li>
+        <li>Генерацию выполняет локальная модель через <strong>OpenVINO Model Server (OVMS)</strong> и OpenAI-совместимый API; при локальной настройке исходный код обрабатывается без отправки во внешний AI-сервис.</li>
+        <li>Инструмент рефакторинга возвращает переработанный текст без изменения исходного файла; отдельный CLI-оркестратор работает как <strong>MCP-клиент</strong> и выполняет выбранные моделью вызовы инструментов.</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">Python 3.13</span><span class="tag">MCP</span><span class="tag">Streamable HTTP</span>
+        <span class="tag">OVMS</span><span class="tag">pytest</span><span class="tag">Pydantic</span>
+        <span class="tag">Локальная LLM</span>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-head">
+        <div class="item-title">📨 Webhook Relay Service — сервис доставки вебхуков</div>
+        <div class="item-sub"><a href="webhook_relay_service.md">README · Webhook Relay Service</a></div>
+      </div>
+      <ul>
+        <li>Приём событий через <strong>HTTP API</strong>, сохранение в <strong>PostgreSQL</strong> и асинхронная доставка зарегистрированным получателям через <strong>Celery / Redis</strong>; постановка события в очередь возвращает <code>202</code> и <code>event_id</code>.</li>
+        <li>Подпись каждого исходящего запроса с помощью <strong>HMAC-SHA256</strong> по точным байтам JSON; секрет получателя возвращается только при регистрации.</li>
+        <li>До трёх общих попыток доставки при временных сетевых ошибках, ответах <code>5xx</code> и <code>429</code>, с паузами 2 и 4 секунды; постоянный <code>4xx</code> завершает доставку сразу.</li>
+        <li>API для просмотра статуса события и всех попыток доставки, проверка PostgreSQL и Redis через <code>/health</code>, документация Swagger UI.</li>
+        <li><strong>Docker Compose</strong>, автоматическое применение миграций <strong>Alembic</strong> при старте API; проверки на <strong>pytest</strong> и <strong>Ruff</strong>.</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">HTTP API</span><span class="tag">PostgreSQL</span><span class="tag">Celery</span>
+        <span class="tag">Redis</span><span class="tag">HMAC-SHA256</span><span class="tag">Alembic</span>
+        <span class="tag">Docker Compose</span><span class="tag">pytest</span><span class="tag">Ruff</span>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-head">
+        <div class="item-title">🤝 AI-buddy — помощник стажёра в онбординге</div>
+        <div class="item-sub"><a href="ai_buddy.md">README · AI-buddy</a></div>
+      </div>
+      <ul>
+        <li><strong>Командный прототип для Hack&amp;Change 2026, в разработке.</strong> Помощник стажёра Авито: план адаптации, чат и помощь наставника.</li>
+        <li>В описанной в README ветке реализованы <strong>Go backend</strong> с мок-входом и JWT, планом и статусами задач, чатом с <strong>SSE</strong> и историей; <strong>Python AI-сервис</strong> с MCP-клиентом и вызовами инструментов.</li>
+        <li>Проверки роли, владельца, команды и назначения перед вызовом инструмента; предложения действий сохраняются до отправки в SSE, запись выполняется через отдельное HTTP-подтверждение.</li>
+        <li>Ответы наставника с публикацией в полнотекстовую базу знаний; <strong>PostgreSQL с pgvector</strong>, Redis и Docker Compose. Подключение поиска базы знаний к чату и семантический поиск ещё предстоят.</li>
+        <li>Unit- и интеграционные тесты Python, тестовая Compose-конфигурация и CI; frontend и UI подтверждения действий ещё требуют интеграции. README отдельно отмечает, что часть изменений находится в ветках и PR, а не в <code>main</code>.</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">Командный прототип</span><span class="tag">Go</span><span class="tag">Python</span>
+        <span class="tag">MCP</span><span class="tag">SSE</span><span class="tag">JWT</span>
+        <span class="tag">PostgreSQL / pgvector</span><span class="tag">Redis</span><span class="tag">Docker Compose</span>
+      </div>
+    </div>
 
     <div class="item">
       <div class="item-head">
