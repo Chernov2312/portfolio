@@ -237,26 +237,62 @@
     <div class="item">
       <div class="item-head">
         <div class="item-title">⚡ Spark — веб-мессенджер с ИИ-функциями</div>
-        <div class="item-sub"><a href="Spark.md">README · Spark</a></div>
+        <div class="item-sub"><a href="Spark.md">README · Spark</a> · <a href="https://github.com/Chernov2312/Spark" target="_blank" rel="noopener">GitHub · Spark</a></div>
       </div>
       <ul>
         <li>Backend на <strong>FastAPI</strong> с REST API и <strong>WebSocket</strong>: личные и групповые чаты, профили, аватары, статусы набора текста и реакции.</li>
         <li>Регистрация, подтверждение почты и вход по <strong>JWT</strong>; хранение данных в <strong>PostgreSQL</strong>, передача событий и очередь сообщений через <strong>Redis</strong>, фоновые задачи в <strong>Celery</strong>.</li>
-        <li>Краткое содержание переписки и переписывание текста через локальную <strong>Ollama</strong> с OpenAI-совместимым клиентом; распознавание голосовых вложений через <strong>Whisper</strong> по запросу пользователя.</li>
+        <li>Опросы и викторины с настройками голосования и обновлением результатов через WebSocket; ИИ-сводки и переписывание текста через <strong>Ollama</strong>, распознавание голосовых вложений через <strong>Whisper</strong>.</li>
+        <li>Аудио- и видеозвонки через <strong>WebRTC</strong> и <strong>LiveKit</strong>; Go-сервис сигналинга поддерживает гостевые ссылки.</li>
         <li>Сообщения с файлами и изображениями, загрузка вложений в <strong>S3-совместимое хранилище Yandex Cloud</strong>.</li>
         <li>Запуск через <strong>Docker Compose</strong> с миграциями <strong>Alembic</strong>; отдельное тестовое окружение с PostgreSQL и Redis, <strong>pytest</strong>, Testcontainers и <strong>Ruff</strong>.</li>
       </ul>
       <div class="tags">
         <span class="tag">FastAPI</span><span class="tag">WebSocket</span><span class="tag">PostgreSQL</span>
         <span class="tag">Redis</span><span class="tag">Celery</span><span class="tag">Ollama</span>
-        <span class="tag">Whisper</span><span class="tag">S3</span><span class="tag">Docker Compose</span>
+        <span class="tag">Whisper</span><span class="tag">WebRTC</span><span class="tag">LiveKit</span>
+        <span class="tag">Go</span><span class="tag">S3</span><span class="tag">Docker Compose</span>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-head">
+        <div class="item-title">⌨️ MalCher — тренажёр слепой печати</div>
+        <div class="item-sub"><a href="https://github.com/bambaleylaorigin" target="_blank" rel="noopener">GitHub · bambaleylaorigin</a></div>
+      </div>
+      <ul>
+        <li>Курс из 10 уроков с последовательным открытием, виртуальной клавиатурой и подсказками по пальцам.</li>
+        <li>Свободная тренировка на цитатах, случайных словах или собственном тексте; статистика скорости (WPM/CPM), точности и ошибок.</li>
+        <li>Профили с историей попыток, опытом, рангами и достижениями; аватары, темы и настройки звука.</li>
+        <li>Frontend на <strong>Vue 3 / TypeScript</strong>, backend на <strong>FastAPI</strong>, <strong>PostgreSQL</strong> и S3-совместимое хранилище; Docker Compose, backend- и frontend-тесты.</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">Vue 3</span><span class="tag">TypeScript</span><span class="tag">FastAPI</span>
+        <span class="tag">PostgreSQL</span><span class="tag">S3</span><span class="tag">Docker Compose</span>
+        <span class="tag">pytest</span><span class="tag">Vitest</span>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-head">
+        <div class="item-title">🎧 Listen Together — комнаты для совместного прослушивания</div>
+        <div class="item-sub"><a href="https://github.com/Chernov2312" target="_blank" rel="noopener">GitHub · Chernov2312</a></div>
+      </div>
+      <ul>
+        <li>Авторизация, публичные и закрытые комнаты с кодами приглашения и отображением подключённых слушателей.</li>
+        <li><strong>FastAPI</strong> REST API и <strong>WebSocket</strong> передают состояние плеера; <strong>Redis Pub/Sub</strong> распространяет события комнаты.</li>
+        <li><strong>Проект в разработке:</strong> очередь, каталог треков и полноценное воспроизведение ещё требуют завершения.</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">FastAPI</span><span class="tag">WebSocket</span><span class="tag">Redis</span>
+        <span class="tag">PostgreSQL</span><span class="tag">Docker Compose</span>
       </div>
     </div>
 
     <div class="item">
       <div class="item-head">
         <div class="item-title">💬 Chat with model — веб-приложение для общения с GigaChat</div>
-        <div class="item-sub"><a href="chat_with_model.md">README · Chat with model</a></div>
+        <div class="item-sub"><a href="chat_with_model.md">README · Chat with model</a> · <a href="https://github.com/Chernov2312/chat_with_model" target="_blank" rel="noopener">GitHub · chat_with_model</a></div>
       </div>
       <ul>
         <li>Frontend на <strong>React/Vite</strong>, API на <strong>FastAPI</strong>, данные пользователей и история чатов хранятся в <strong>PostgreSQL</strong>.</li>
@@ -274,7 +310,7 @@
     <div class="item">
       <div class="item-head">
         <div class="item-title">🧪 Code Tester MCP — инструменты для тестирования Python-проектов</div>
-        <div class="item-sub"><a href="code_tester.md">README · Code Tester MCP</a></div>
+        <div class="item-sub"><a href="code_tester.md">README · Code Tester MCP</a> · <a href="https://github.com/Chernov2312/code_tester" target="_blank" rel="noopener">GitHub · code_tester</a></div>
       </div>
       <ul>
         <li><strong>MCP-сервер</strong> с транспортом <strong>Streamable HTTP</strong> связывает Python-проект с AI-ассистентом: чтение дерева проекта и файлов, подготовка тестов и рефакторинг.</li>
@@ -292,7 +328,7 @@
     <div class="item">
       <div class="item-head">
         <div class="item-title">📨 Webhook Relay Service — сервис доставки вебхуков</div>
-        <div class="item-sub"><a href="webhook_relay_service.md">README · Webhook Relay Service</a></div>
+        <div class="item-sub"><a href="webhook_relay_service.md">README · Webhook Relay Service</a> · <a href="https://github.com/Chernov2312/webhook_relay_service" target="_blank" rel="noopener">GitHub · webhook_relay_service</a></div>
       </div>
       <ul>
         <li>Приём событий через <strong>HTTP API</strong>, сохранение в <strong>PostgreSQL</strong> и асинхронная доставка зарегистрированным получателям через <strong>Celery / Redis</strong>; постановка события в очередь возвращает <code>202</code> и <code>event_id</code>.</li>
@@ -311,7 +347,7 @@
     <div class="item">
       <div class="item-head">
         <div class="item-title">🤝 AI-buddy — помощник стажёра в онбординге</div>
-        <div class="item-sub"><a href="ai_buddy.md">README · AI-buddy</a></div>
+        <div class="item-sub"><a href="ai_buddy.md">README · AI-buddy</a> · <a href="https://github.com/ai-buddy-hc2026/ai-buddy" target="_blank" rel="noopener">GitHub · ai-buddy</a></div>
       </div>
       <ul>
         <li><strong>Командный прототип для Hack&amp;Change 2026, в разработке.</strong> Помощник стажёра Авито: план адаптации, чат и помощь наставника.</li>
@@ -348,7 +384,7 @@
     <div class="item">
       <div class="item-head">
         <div class="item-title">🏢 Переговорки — сервис бронирования коворкинга</div>
-        <div class="item-sub"><a href="https://github.com/koworking" target="_blank" rel="noopener">koworking</a></div>
+        <div class="item-sub"><a href="https://github.com/Chernov2312/koworking" target="_blank" rel="noopener">GitHub · koworking</a></div>
       </div>
       <ul>
         <li>Асинхронный API на <strong>FastAPI</strong>, JWT-аутентификация с ролями <code>employee</code> / <code>admin</code>.</li>
